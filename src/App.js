@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
+import Main from './components/Main';
+import Footer from './components/Footer';
 
 function HomePage() {
   return <h2>Bienvenido a la página principal</h2>;
@@ -16,6 +18,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
         </Routes>
       </div>
+      <Main />
+      <Footer />
     </Router>
   );
 }
