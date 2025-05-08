@@ -1,0 +1,35 @@
+.categorias-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 16px;
+  }
+  
+  .categorias-titulo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: #333;
+  }
+  
+  .categorias-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 16px;
+  }
+  
+  .categoria-item {
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    color: #444;
+    transition: all 0.2s ease;
+  }
+  
+  .categoria-item:hover {
+    background-color: #eef1f4;
+    transform: translateY(-3px);
+  }
+  

@@ -1,7 +1,9 @@
 .main-container {
     background-color: var(--color-fondo);
-    min-height: 100vh;
-    padding: 20px;
+    min-height: calc(100vh - 160px); /* Resta Header y Footer si miden 80px cada uno */
+    padding: 2rem;
     box-sizing: border-box;
   }
+  
+
   

@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "./AdminPanel.css";
 
 const AdminPanel = () => {
   const navigate = useNavigate();
@@ -9,17 +10,28 @@ const AdminPanel = () => {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 p-6">
-      <h1 className="text-3xl font-bold mb-6">Panel de Administración</h1>
-      <button
-        onClick={handleAgregarProducto}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-      >
-        Agregar Producto
-      </button>
-      {/* Aquí irán otras funciones administrativas */}
-    </main>
+    <>
+      <div className="admin-header-bar">
+        <button
+          onClick={handleAgregarProducto}
+          className="admin-button agregar"
+        >
+          Agregar Producto
+        </button>
+        <button
+          onClick={() => navigate("/admin/lista-productos")}
+          className="admin-button lista"
+        >
+          Lista de Hoteles
+        </button>
+      </div>
+
+      <main className="admin-container">
+        <h1 className="text-3xl font-bold mb-6">Panel de Administración</h1>
+      </main>
+    </>
   );
 };
 
 export default AdminPanel;
+

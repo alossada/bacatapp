@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import './Buscador.css';
 
 const Buscador = () => {
   const [productos, setProductos] = useState([]);
@@ -24,29 +25,26 @@ const Buscador = () => {
   );
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-10">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Buscar Productos</h2>
+    <section className="buscador-container">
+      <h2 className="buscador-titulo">Buscar Productos</h2>
       <input
         type="text"
         placeholder="Buscar por nombre..."
         value={busqueda}
         onChange={(e) => setBusqueda(e.target.value)}
-        className="w-full mb-6 p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="buscador-input"
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="buscador-grid">
         {productosFiltrados.map((producto) => (
-          <div
-            key={producto.id}
-            className="bg-white rounded-2xl shadow-md p-6 hover:shadow-xl transition"
-          >
-            <h3 className="text-lg font-semibold mb-2 text-gray-900">{producto.nombre}</h3>
-            <p className="text-gray-600 mb-3">{producto.descripcion}</p>
+          <div key={producto.id} className="buscador-card">
+            <h3 className="buscador-nombre">{producto.nombre}</h3>
+            <p className="buscador-descripcion">{producto.descripcion}</p>
             {producto.imagenes?.[0] && (
               <img
                 src={producto.imagenes[0]}
                 alt={producto.nombre}
-                className="rounded-md w-full h-40 object-cover"
+                className="buscador-imagen"
               />
             )}
           </div>
@@ -57,6 +55,7 @@ const Buscador = () => {
 };
 
 export default Buscador;
+
 
 
   

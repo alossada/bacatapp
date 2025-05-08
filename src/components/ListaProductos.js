@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import './ListaProductos.css';
 
 const ListaProductos = () => {
   const [productos, setProductos] = useState([]);
@@ -21,31 +22,24 @@ const ListaProductos = () => {
   }, []);
 
   return (
-    <div className="max-w-6xl mx-auto mt-10 px-4">
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-        Nuestros Hoteles
-      </h2>
+    <div className="lista-container">
+      <h2 className="lista-titulo">Nuestros Hoteles</h2>
 
-      {error && <p className="text-red-600 text-center">{error}</p>}
+      {error && <p className="lista-error">{error}</p>}
 
       {productos.length === 0 ? (
-        <p className="text-center text-gray-500">No hay hoteles disponibles.</p>
+        <p className="lista-vacio">No hay hoteles disponibles.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="productos-grid">
           {productos.map((producto) => (
-            <div
-              key={producto.id}
-              className="bg-white rounded-2xl shadow-md p-6 transition transform hover:scale-105 hover:shadow-xl"
-            >
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                {producto.nombre}
-              </h3>
-              <p className="text-gray-600 mb-4">{producto.descripcion}</p>
+            <div key={producto.id} className="producto-card">
+              <h3 className="producto-nombre">{producto.nombre}</h3>
+              <p className="producto-descripcion">{producto.descripcion}</p>
               {producto.imagenes?.[0] && (
                 <img
                   src={producto.imagenes[0]}
                   alt={producto.nombre}
-                  className="rounded-lg object-cover h-48 w-full"
+                  className="producto-imagen"
                 />
               )}
             </div>
@@ -57,5 +51,6 @@ const ListaProductos = () => {
 };
 
 export default ListaProductos;
+
 
 

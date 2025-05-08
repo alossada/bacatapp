@@ -41,16 +41,17 @@ const DetalleProducto = () => {
       {/* Body */}
       <main className="max-w-4xl mx-auto p-6 bg-white mt-6 rounded-lg shadow">
         <p className="text-gray-700 mb-4">{producto.descripcion}</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {producto.imagenes?.map((img, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {producto.imagenes?.map((img, index) => (
             <img
-              key={index}
-              src={img}
-              alt={`Imagen ${index + 1}`}
-              className="rounded w-full h-64 object-cover"
+            key={index}
+            src={img}
+            alt={`Imagen ${index + 1}`}
+            className="rounded-lg w-full h-56 object-cover hover:scale-105 transition-transform"
             />
-          ))}
+            ))}
         </div>
+
       </main>
     </div>
   );

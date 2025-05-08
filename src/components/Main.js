@@ -8,8 +8,8 @@ const Main = () => {
   return (
     <main className="main-container">
       <Buscador />
-      <Categorias />
-      <Recomendaciones />
+      <Categorias />            
+      <Recomendaciones />      
     </main>
   );
 };

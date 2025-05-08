@@ -7,6 +7,8 @@ import AdminPanel from "./pages/AdminPanel";
 import AgregarProducto from './pages/AgregarProducto';
 import ListaProductos from "./components/ListaProductos";
 import DetalleProducto from "./components/DetalleProducto";
+import AdminListaProductos from './pages/AdminListaProductos';
+
 
 function HomePage() {
   return <h2>Bienvenido a BacataApp</h2>;
@@ -24,6 +26,7 @@ function App() {
           <Route path="/admin/agregar-producto" element={<AgregarProducto />} />
           <Route path="/hoteles" element={<ListaProductos />} />
           <Route path="/productos/:id" element={<DetalleProducto />} />
+          <Route path='/admin/lista-productos' element={<AdminListaProductos/>}/>
         </Routes>
       </div>
       <Main />
