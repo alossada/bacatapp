@@ -1,0 +1,92 @@
+/* AdminProductoForm.css */
+
+.admin-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.admin-form label {
+  display: block;
+  margin-bottom: 1rem;
+  color: #444;
+  font-weight: 600;
+}
+
+.admin-form input[type="text"],
+.admin-form textarea,
+.admin-form select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.admin-form input[type="text"]:focus,
+.admin-form textarea:focus,
+.admin-form select:focus {
+  border-color: #2196F3;
+  outline: none;
+}
+
+.admin-form textarea {
+  resize: vertical;
+}
+
+.btn-group {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-save,
+.btn-cancel {
+  flex: 1;
+  padding: 0.6rem 0;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.btn-save {
+  background-color: #4CAF50;
+}
+
+.btn-save:hover:not(:disabled) {
+  background-color: #45a049;
+}
+
+.btn-save:disabled {
+  background-color: #9ccc9c;
+  cursor: not-allowed;
+}
+
+.btn-cancel {
+  background-color: #f44336;
+}
+
+.btn-cancel:hover {
+  background-color: #d32f2f;
+}
+
+.error {
+  color: #d32f2f;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}

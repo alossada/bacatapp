@@ -8,7 +8,8 @@ import AgregarProducto from './pages/AgregarProducto';
 import ListaProductos from "./components/ListaProductos";
 import DetalleProducto from "./components/DetalleProducto";
 import AdminListaProductos from './pages/AdminListaProductos';
-
+import Categorias from "./components/Categorias";
+import ProductosPorCategoria from "./components/ProductosPorCategoria";
 
 function HomePage() {
   return <h2>Bienvenido a BacataApp</h2>;
@@ -27,6 +28,8 @@ function App() {
           <Route path="/hoteles" element={<ListaProductos />} />
           <Route path="/productos/:id" element={<DetalleProducto />} />
           <Route path='/admin/lista-productos' element={<AdminListaProductos/>}/>
+          <Route path="/categorias" element={<Categorias />} />
+          <Route path="/categorias/:id/productos" element={<ProductosPorCategoria />} />
         </Routes>
       </div>
       <Main />

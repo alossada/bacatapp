@@ -1,92 +1,103 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import "./AdminPanel.css";
+import React, { useEffect, useState } from 'react';
+import api from '../utils/api';
+import { useNavigate } from 'react-router-dom';
+import './AdminListaProductos.css'; // ⬅️ Importa el archivo de estilos
 
 const AdminListaProductos = () => {
   const [productos, setProductos] = useState([]);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // Cargar productos al montar el componente
-  const fetchProductos = async () => {
-    try {
-      const response = await axios.get("http://localhost:8080/productos");
-      console.log("Productos obtenidos:", response.data);
-      setProductos(response.data);
-    } catch (error) {
-      console.error("Error al obtener productos:", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const response = await api.get('/productos');
+        setProductos(response.data || []);
+      } catch (err) {
+        setError('Error al cargar productos');
+      }
+    };
     fetchProductos();
   }, []);
 
-  // Eliminar producto
   const handleEliminar = async (id) => {
-    console.log("ID a eliminar:", id); // Confirmar ID
-
-    const confirmar = window.confirm("¿Estás seguro de que deseas eliminar este producto?");
-    if (!confirmar) return;
-
+    if (!window.confirm('¿Eliminar este producto?')) return;
     try {
-      await axios.delete(`http://localhost:8080/productos/${id}`);
-      console.log("Producto eliminado correctamente");
-      // Quitar el producto eliminado del estado
-      setProductos((prevProductos) =>
-        prevProductos.filter((producto) => producto.id !== id)
-      );
-    } catch (error) {
-      console.error("Error al eliminar producto:", error);
-      alert("Ocurrió un error al intentar eliminar el producto.");
+      await api.delete(`/productos/${id}`);
+      setProductos(productos.filter(p => p.id !== id));
+    } catch {
+      alert('Error al eliminar producto.');
     }
   };
 
+  const handleEditar = (id) => {
+    navigate(`/admin/editar-producto/${id}`);
+  };
+
   return (
-    <>
-      <div className="admin-header-bar">
-        <button onClick={() => navigate("/admin")} className="admin-button lista">
-          Volver al Panel
-        </button>
-        <button onClick={() => navigate("/admin/agregar-producto")} className="admin-button agregar">
-          Agregar Producto
+    <div className="admin-container">
+      <div className="admin-header">
+        <h2>Administrar Productos</h2>
+        <button className="btn-add" onClick={() => navigate('/admin/agregar-producto')}>
+          + Agregar Producto
         </button>
       </div>
 
-      <main className="admin-container">
-        <div className="contenido-box">
-          <h2 className="titulo">Lista de Productos</h2>
-          <table className="tabla">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {productos.map((producto) => (
-                <tr key={producto.id}>
-                  <td>{producto.id}</td>
-                  <td>{producto.nombre}</td>
+      {error && <p className="error">{error}</p>}
+
+      <div className="table-container">
+        <table className="admin-table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Categoría</th>
+              <th>Imagen</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {productos.length > 0 ? (
+              productos.map(p => (
+                <tr key={p.id}>
+                  <td>{p.nombre}</td>
+                  <td>{p.descripcion}</td>
+                  <td>{p.categoria?.titulo || 'Sin categoría'}</td>
                   <td>
-                    <button className="btn-accion editar">Editar</button>
-                    <button
-                      className="btn-accion eliminar"
-                      onClick={() => handleEliminar(producto.id)}
-                    >
+                    {p.imagenes?.length > 0 ? (
+                      <img
+                        src={p.imagenes[0]}
+                        alt={p.nombre}
+                        className="product-image"
+                      />
+                    ) : (
+                      <span className="text-muted">Sin imagen</span>
+                    )}
+                  </td>
+                  <td>
+                    <button className="btn-edit" onClick={() => handleEditar(p.id)}>
+                      Editar
+                    </button>
+                    <button className="btn-delete" onClick={() => handleEliminar(p.id)}>
                       Eliminar
                     </button>
                   </td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </main>
-    </>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="text-muted">
+                  No hay productos registrados.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 
 export default AdminListaProductos;
+
 
