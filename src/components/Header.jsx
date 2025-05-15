@@ -1,9 +1,7 @@
 import React from 'react';
 import './Header.css'; 
 import logo from '../assets/logo.png'; 
-import { useNavigate } from 'react-router-dom';
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from 'react-router-dom';
 
 function Header() {
   const navigate = useNavigate();
@@ -19,8 +17,12 @@ function Header() {
         <span className="tagline">Tu lugar para reservar</span>
       </div>
       <div className="header-right">
-        <button className="header-button">Crear cuenta</button>
-        <button className="header-button">Iniciar sesión</button>
+        <Link to="/registro">
+          <button className="header-button">Crear cuenta</button>
+        </Link>
+        <Link to="/login">
+          <button className="header-button">Iniciar sesión</button>
+        </Link>
       </div>      
       <Link to="/admin" className="text-white hover:text-gray-300 mx-2">
         Admin
@@ -30,3 +32,4 @@ function Header() {
 }
 
 export default Header;
+

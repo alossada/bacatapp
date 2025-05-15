@@ -10,6 +10,8 @@ import DetalleProducto from "./components/DetalleProducto";
 import AdminListaProductos from './pages/AdminListaProductos';
 import Categorias from "./components/Categorias";
 import ProductosPorCategoria from "./components/ProductosPorCategoria";
+import RegistroUsuario from './components/RegistroUsuario';
+
 
 function HomePage() {
   return <h2>Bienvenido a BacataApp</h2>;
@@ -23,6 +25,7 @@ function App() {
         {/* Evita que el contenido quede detrás del header fijo */}
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/registro" element={<RegistroUsuario />} />
           <Route path="/admin" element={<AdminPanel />} />
           <Route path="/admin/agregar-producto" element={<AgregarProducto />} />
           <Route path="/hoteles" element={<ListaProductos />} />
