@@ -7,7 +7,7 @@ const AdminListaProductos = () => {
   const [productos, setProductos] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     const fetchProductos = async () => {
       try {
@@ -32,7 +32,7 @@ const AdminListaProductos = () => {
 
   const handleEditar = (id) => {
     navigate(`/admin/editar-producto/${id}`);
-  };
+  }; 
 
   return (
     <div className="admin-container">
@@ -64,6 +64,7 @@ const AdminListaProductos = () => {
                   <td>{p.descripcion}</td>
                   <td>{p.categoria?.titulo || 'Sin categoría'}</td>
                   <td>
+
                     {p.imagenes?.length > 0 ? (
                       <img
                         src={p.imagenes[0]}
@@ -79,7 +80,8 @@ const AdminListaProductos = () => {
                       Editar
                     </button>
                     <button className="btn-delete" onClick={() => handleEliminar(p.id)}>
-                      Eliminar
+                          
+                     Eliminar
                     </button>
                   </td>
                 </tr>
@@ -99,5 +101,4 @@ const AdminListaProductos = () => {
 };
 
 export default AdminListaProductos;
-
 
