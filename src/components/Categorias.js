@@ -1,23 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { obtenerCategorias } from "../services/categoriaService";
 import "./Categorias.css";
 
 const Categorias = () => {
-  const categoriasEjemplo = [
-    "Playa",
-    "Montaña",
-    "Ciudad",
-    "Campo",
-    "Aventura",
-    "Lujo",
-  ];
+  const [categorias, setCategorias] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const cargarCategorias = async () => {
+      try {
+        const data = await obtenerCategorias();
+        console.log("Categorías cargadas:", data);
+        setCategorias(data);
+      } catch (error) {
+        console.error("Error al cargar categorías:", error);
+      }
+    };
+
+    cargarCategorias();
+  }, []);
+
+  const handleClickCategoria = (id) => {
+    navigate(`/categorias/${id}/productos`);
+  };
 
   return (
     <section className="categorias-container">
       <h2 className="categorias-titulo">Categorías</h2>
       <div className="categorias-lista">
-        {categoriasEjemplo.map((cat, index) => (
-          <div key={index} className="categoria-item">
-            {cat}
+        {categorias.map((cat) => (
+          <div
+            key={cat.id}
+            className="categoria-item"
+            onClick={() => handleClickCategoria(cat.id)}
+            style={{ cursor: "pointer" }}
+          >
+            <img src={cat.imagenUrl} alt={cat.titulo} className="categoria-imagen" />
+            <h3>{cat.titulo}</h3>
+            <p>{cat.descripcion}</p>
           </div>
         ))}
       </div>
@@ -26,3 +47,5 @@ const Categorias = () => {
 };
 
 export default Categorias;
+
+
