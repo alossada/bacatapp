@@ -1,18 +1,17 @@
-/* Header.css */
 .main-header {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   height: 80px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #ddd;
+  background-color: #003049;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
+  padding: 0 24px;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .header-left {
@@ -22,74 +21,95 @@
 }
 
 .logo {
-  height: 50px;
+  height: 40px;
   margin-right: 10px;
 }
 
 .tagline {
   font-size: 1.1rem;
-  font-weight: 600;
-  color: #333;
+  font-weight: bold;
 }
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 12px;
 }
 
 .header-button {
-  background-color: transparent;
-  border: 1px solid #333;
-  color: #333;
-  padding: 8px 16px;
+  background-color: #f77f00;
+  color: white;
+  border: none;
+  padding: 8px 14px;
   border-radius: 5px;
-  cursor: pointer;
   font-weight: 500;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .header-button:hover {
-  background-color: #333;
-  color: white;
+  background-color: #fcbf49;
 }
 
-/* Estilo para el enlace Admin */
-.main-header a {
-  text-decoration: none;
-  color: #333;
-  margin-left: 1rem;
+.cerrar-sesion {
+  background-color: #d62828;
+}
+
+.cerrar-sesion:hover {
+  background-color: #b91d1d;
+}
+
+.usuario-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #012a4a;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  background-color: #fcbf49;
+  color: #003049;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.usuario-nombre {
   font-weight: 500;
+  font-size: 14px;
 }
 
-.main-header a:hover {
-  color: #333;
+.admin-link {
+  color: white;
+  margin-left: 16px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.admin-link:hover {
+  color: #fcbf49;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .main-header {
-    flex-direction: column;
-    align-items: flex-start;
-    height: auto;
-    padding: 1rem;
-  }
-
-  .header-left,
-  .header-right {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .header-right {
-    margin-top: 0.5rem;
-  }
-
   .tagline {
-    font-size: 1rem;
+    display: none;
   }
 
-  .logo {
-    height: 40px;
+  .header-button {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+
+  .usuario-nombre {
+    display: none;
   }
 }
+

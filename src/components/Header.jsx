@@ -1,13 +1,25 @@
 import React from 'react';
 import './Header.css'; 
 import logo from '../assets/logo.png'; 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
-function Header() {
+function Header({ usuario, setUsuario }) {
   const navigate = useNavigate();
 
   const handleHome = () => {
     navigate('/');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token'); // Elimina el token si lo estás usando
+    setUsuario(null);                 // Limpia el estado de usuario
+    navigate('/');                   // Redirige al home
+  };
+
+  const obtenerIniciales = (nombreCompleto) => {
+    const partes = nombreCompleto.trim().split(' ');
+    const iniciales = partes.slice(0, 2).map(p => p.charAt(0).toUpperCase());
+    return iniciales.join('');
   };
 
   return (
@@ -16,15 +28,23 @@ function Header() {
         <img src={logo} alt="Logo" className="logo" />
         <span className="tagline">Tu lugar para reservar</span>
       </div>
+
       <div className="header-right">
-        <Link to="/registro">
-          <button className="header-button">Crear cuenta</button>
-        </Link>
-        <Link to="/login">
-          <button className="header-button">Iniciar sesión</button>
-        </Link>
-      </div>      
-      <Link to="/admin" className="text-white hover:text-gray-300 mx-2">
+        {!usuario ? (
+          <>
+            <button className="header-button" onClick={() => navigate('/registro')}>Crear cuenta</button>
+            <button className="header-button" onClick={() => navigate('/login')}>Iniciar sesión</button>
+          </>
+        ) : (
+          <div className="usuario-info">
+            <div className="avatar">{obtenerIniciales(`${usuario.nombre} ${usuario.apellido}`)}</div>
+            <span className="usuario-nombre">{usuario.nombre}</span>
+            <button className="header-button cerrar-sesion" onClick={handleLogout}>Cerrar sesión</button>
+          </div>
+        )}
+      </div>
+
+      <Link to="/admin" className="admin-link">
         Admin
       </Link>
     </header>
@@ -32,4 +52,7 @@ function Header() {
 }
 
 export default Header;
+
+
+
 
