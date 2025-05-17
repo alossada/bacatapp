@@ -1,30 +1,29 @@
 import React from 'react';
-import './Header.css'; 
-import logo from '../assets/logo.png'; 
 import { useNavigate, Link } from 'react-router-dom';
+import './Header.css';
+import logo from '../assets/logo.png';
 
 function Header({ usuario, setUsuario }) {
   const navigate = useNavigate();
 
-  const handleHome = () => {
+  const handleLogout = () => {
+    localStorage.removeItem('usuario');  // elimina usuario guardado
+    setUsuario(null);                    // limpia estado global
     navigate('/');
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('token'); // Elimina el token si lo estás usando
-    setUsuario(null);                 // Limpia el estado de usuario
-    navigate('/');                   // Redirige al home
-  };
-
-  const obtenerIniciales = (nombreCompleto) => {
-    const partes = nombreCompleto.trim().split(' ');
-    const iniciales = partes.slice(0, 2).map(p => p.charAt(0).toUpperCase());
-    return iniciales.join('');
-  };
+  const iniciales = usuario
+    ? `${usuario.nombre} ${usuario.apellido}`
+        .trim()
+        .split(' ')
+        .slice(0, 2)
+        .map((p) => p[0].toUpperCase())
+        .join('')
+    : '';
 
   return (
     <header className="main-header">
-      <div className="header-left" onClick={handleHome}>
+      <div className="header-left" onClick={() => navigate('/')}>
         <img src={logo} alt="Logo" className="logo" />
         <span className="tagline">Tu lugar para reservar</span>
       </div>
@@ -37,21 +36,23 @@ function Header({ usuario, setUsuario }) {
           </>
         ) : (
           <div className="usuario-info">
-            <div className="avatar">{obtenerIniciales(`${usuario.nombre} ${usuario.apellido}`)}</div>
+            <div className="avatar">{iniciales}</div>
             <span className="usuario-nombre">{usuario.nombre}</span>
             <button className="header-button cerrar-sesion" onClick={handleLogout}>Cerrar sesión</button>
           </div>
         )}
-      </div>
 
-      <Link to="/admin" className="admin-link">
-        Admin
-      </Link>
+        {/* Enlace Admin solo si el rol es ADMIN */}
+        {usuario?.rol === 'ADMIN' && (
+          <Link to="/admin" className="admin-link">Admin</Link>
+        )}
+      </div>
     </header>
   );
 }
 
 export default Header;
+
 
 
 

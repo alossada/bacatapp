@@ -9,6 +9,10 @@ const AdminPanel = () => {
     navigate("/admin/agregar-producto");
   };
 
+  const handleCrearAdmin = () => {
+    navigate("/admin/crear-admin");
+  };
+
   return (
     <>
       <div className="admin-header-bar">
@@ -18,11 +22,19 @@ const AdminPanel = () => {
         >
           Agregar Producto
         </button>
+
         <button
           onClick={() => navigate("/admin/lista-productos")}
           className="admin-button lista"
         >
           Lista de Hoteles
+        </button>
+
+        <button
+          onClick={handleCrearAdmin}
+          className="admin-button crear-admin"
+        >
+          Crear Admin
         </button>
       </div>
 
@@ -34,4 +46,5 @@ const AdminPanel = () => {
 };
 
 export default AdminPanel;
+
 

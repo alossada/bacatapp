@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
+
 import AdminPanel from "./pages/AdminPanel";
 import AgregarProducto from './pages/AgregarProducto';
+import AdminListaProductos from './pages/AdminListaProductos';
+import CrearAdmin from './pages/CrearAdmin';
+
 import ListaProductos from "./components/ListaProductos";
 import DetalleProducto from "./components/DetalleProducto";
-import AdminListaProductos from './pages/AdminListaProductos';
 import Categorias from "./components/Categorias";
 import ProductosPorCategoria from "./components/ProductosPorCategoria";
 import RegistroUsuario from './components/RegistroUsuario';
@@ -20,15 +24,17 @@ function HomePage() {
 function App() {
   const [usuario, setUsuario] = useState(null);
 
-  // (Opcional) Recuperar usuario desde localStorage al recargar la página
-  /*
+  // ⬇️ Recupera usuario (y su rol) al recargar la página
   useEffect(() => {
-    const usuarioGuardado = localStorage.getItem('usuario');
-    if (usuarioGuardado) {
-      setUsuario(JSON.parse(usuarioGuardado));
+    const guardado = localStorage.getItem('usuario');
+    if (guardado) {
+      setUsuario(JSON.parse(guardado));
     }
   }, []);
-  */
+
+  // ⬇️ Helper para proteger rutas admin
+  const soloAdmin = (element) =>
+    usuario?.rol === 'ADMIN' ? element : <Navigate to="/" replace />;
 
   return (
     <Router>
@@ -38,11 +44,17 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/registro" element={<RegistroUsuario />} />
           <Route path="/login" element={<LoginUsuario onLogin={setUsuario} />} />
-          <Route path="/admin" element={<AdminPanel />} />
-          <Route path="/admin/agregar-producto" element={<AgregarProducto />} />
+
+          {/* 🚫 Rutas protegidas para ADMIN */}
+          <Route path="/admin"                    element={soloAdmin(<AdminPanel />)} />
+          <Route path="/admin/agregar-producto"   element={soloAdmin(<AgregarProducto />)} />
+          <Route path="/admin/lista-productos"    element={soloAdmin(<AdminListaProductos />)} />
+          <Route path="/admin/crear-admin" element={<CrearAdmin />} />
+
+          {/* Rutas públicas */}
           <Route path="/hoteles" element={<ListaProductos />} />
           <Route path="/productos/:id" element={<DetalleProducto />} />
-          <Route path="/admin/lista-productos" element={<AdminListaProductos />} />
+
           <Route path="/categorias" element={<Categorias />} />
           <Route path="/categorias/:id/productos" element={<ProductosPorCategoria />} />
         </Routes>
@@ -54,6 +66,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
