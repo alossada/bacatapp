@@ -20,7 +20,7 @@ const AdminPanel = () => {
           onClick={handleAgregarProducto}
           className="admin-button agregar"
         >
-          Agregar Producto
+          Agregar Hotel
         </button>
 
         <button
@@ -39,7 +39,7 @@ const AdminPanel = () => {
       </div>
 
       <main className="admin-container">
-        <h1 className="text-3xl font-bold mb-6">Panel de Administración</h1>
+        <h1 className="admin-container h1">Panel de Administración</h1>
       </main>
     </>
   );

@@ -1,43 +1,57 @@
 import React, { useState, useEffect } from 'react';
 import api from '../utils/api';
 import { useNavigate } from 'react-router-dom';
-import './AdminProductoForm.css'; // Compartiremos estilos con editar
+import './AdminProductoForm.css'; // Comparte estilos con el de editar
 
 const AgregarProducto = () => {
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [categoriaId, setCategoriaId] = useState('');
   const [imagenes, setImagenes] = useState('');
+  const [caracteristicasSeleccionadas, setCaracteristicasSeleccionadas] = useState([]);
+
   const [categorias, setCategorias] = useState([]);
+  const [caracteristicas, setCaracteristicas] = useState([]);
+
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchCategorias = async () => {
+    const fetchDatos = async () => {
       try {
-        const response = await api.get('/categorias');
-        setCategorias(response.data);
+        const [catRes, caracRes] = await Promise.all([
+          api.get('/categorias'),
+          api.get('/caracteristicas')
+        ]);
+        setCategorias(catRes.data);
+        setCaracteristicas(caracRes.data);
       } catch {
-        setError('Error al cargar categorías');
+        setError('Error al cargar categorías o características');
       }
     };
-    fetchCategorias();
+    fetchDatos();
   }, []);
+
+  const handleCheckboxChange = (id) => {
+    setCaracteristicasSeleccionadas(prev =>
+      prev.includes(id)
+        ? prev.filter(c => c !== id)
+        : [...prev, id]
+    );
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validaciones básicas
     if (!nombre.trim()) return setError('El nombre es obligatorio');
     if (!descripcion.trim()) return setError('La descripción es obligatoria');
     if (!categoriaId) return setError('Seleccione una categoría');
-    // Imagenes opcionales, pero si hay, validar formato sencillo
     if (imagenes.trim()) {
       const urls = imagenes.split(',').map(img => img.trim());
       for (let url of urls) {
-        if (!url.match(/^https?:\/\/.+/)) {
+        if (!/^https?:\/\/.+/.test(url)) {
           return setError('Las URLs de imágenes deben comenzar con http o https');
         }
       }
@@ -50,7 +64,8 @@ const AgregarProducto = () => {
       nombre,
       descripcion,
       categoria: { id: Number(categoriaId) },
-      imagenes: imagenes ? imagenes.split(',').map(img => img.trim()) : [],
+      imagenes: imagenes ? imagenes.split(',').map(i => i.trim()) : [],
+      caracteristicas: caracteristicasSeleccionadas.map(id => ({ id }))
     };
 
     try {
@@ -65,7 +80,7 @@ const AgregarProducto = () => {
 
   return (
     <div className="admin-container">
-      <h2>Agregar Producto</h2>
+      <h2>Agregar Hotel</h2>
 
       {error && <p className="error">{error}</p>}
 
@@ -109,6 +124,22 @@ const AgregarProducto = () => {
         </label>
 
         <label>
+          Características:
+          <div className="caracteristicas-lista">
+            {caracteristicas.map(carac => (
+              <label key={carac.id} className="checkbox-inline">
+                <input
+                  type="checkbox"
+                  checked={caracteristicasSeleccionadas.includes(carac.id)}
+                  onChange={() => handleCheckboxChange(carac.id)}
+                />
+                {carac.nombre}
+              </label>
+            ))}
+          </div>
+        </label>
+
+        <label>
           Imágenes (URLs separadas por coma):
           <input
             type="text"
@@ -136,4 +167,5 @@ const AgregarProducto = () => {
 };
 
 export default AgregarProducto;
+
 

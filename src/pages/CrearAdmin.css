@@ -2,7 +2,7 @@
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
-  background: #f9f9f9;
+  background: #fefdfb;
   border-radius: 8px;
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
 }
@@ -19,25 +19,25 @@
   margin-top: 4px;
   box-sizing: border-box;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid #33717e;
 }
 
 .crear-admin-form button {
   margin-top: 20px;
   padding: 10px 15px;
-  background-color: #007bff;
-  color: white;
+  background-color: #33717e;
+  color: #fefdfb;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .crear-admin-form button:hover {
-  background-color: #0056b3;
+  background-color: #85c1cc;
 }
 
 .error {
-  color: #d8000c;
+  color: #d84561;
   font-size: 0.9em;
   margin-top: 4px;
 }
@@ -45,6 +45,6 @@
 .mensaje {
   margin-top: 15px;
   font-weight: 600;
-  color: green;
+  color: #33717e;
 }
 

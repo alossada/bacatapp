@@ -3,73 +3,52 @@
   top: 70px;
   left: 0;
   width: 100%;
-  background-color: #f5f5f5; /* gris muy claro */
+  background-color: #fefdfb; 
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   z-index: 1000;
   display: flex;
   justify-content: center;
   gap: 1rem;
   padding: 1rem;
-  border-bottom: 1px solid #d1d5db; /* gris medio */
+  border-bottom: 1px solid #d1d5db; 
 }
 
 .admin-button {
   padding: 0.6rem 1.4rem;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   border: none;
   border-radius: 6px;
   transition: all 0.25s ease;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  background-color: #e0e0e0;
-  color: #333333;
+  background-color: #fefdfb;
 }
 
-.admin-button:hover {
-  background-color: #d1d5db; /* gris un poco más oscuro */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  color: #1f2937;
+.admin-button.agregar, .admin-button.lista, .admin-button.crear-admin {
+  background-color: #bfdfe6; 
+  color: #33717e;
 }
 
-.admin-button.agregar {
-  background-color: #374151; /* azul grisáceo oscuro */
-  color: white;
-}
-
-.admin-button.agregar:hover {
-  background-color: #1e293b; /* más oscuro */
+.admin-button.agregar:hover, .admin-button.lista:hover, .admin-button.crear-admin:hover {
+  background-color: #33717e; 
+  color: #fefdfb;
   box-shadow: 0 4px 10px rgba(30,41,59,0.4);
-}
-
-.admin-button.lista {
-  background-color: #6b7280; /* gris azulado */
-  color: white;
-}
-
-.admin-button.lista:hover {
-  background-color: #4b5563;
-  box-shadow: 0 4px 10px rgba(75,85,99,0.4);
-}
-
-.admin-button.crear-admin {
-  background-color: #2563eb; /* azul brillante */
-  color: white;
-  margin-left: 10px;
-}
-
-.admin-button.crear-admin:hover {
-  background-color: #1e40af; /* azul oscuro */
-  box-shadow: 0 4px 10px rgba(30,64,175,0.6);
 }
 
 .admin-container {
   min-height: 100vh;
-  background-color: #fafafa;
-  padding-top: 160px;
-  padding: 2rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 10px;
+  background-color: fefdfb;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333333;
+}
+
+.admin-container h1{
+  margin-top: 10px;
+  font-size: 15px;
+  color: #33717e;
+  font-weight: 600;
 }
 
 .contenido-box {
@@ -79,118 +58,4 @@
   padding: 2.5rem;
   max-width: 900px;
   margin: auto;
-}
-
-.titulo {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: 1.25rem;
-  color: #1f2937;
-}
-
-.tabla {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 15px;
-}
-
-.tabla th, .tabla td {
-  border: 1px solid #e5e7eb;
-  padding: 12px;
-  text-align: center;
-  color: #374151;
-}
-
-.tabla th {
-  background-color: #f3f4f6;
-  color: #4b5563;
-  font-weight: 600;
-}
-
-.btn-accion {
-  padding: 7px 12px;
-  border: none;
-  border-radius: 6px;
-  margin-right: 8px;
-  font-size: 14px;
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.btn-accion.editar {
-  background-color: #fbbf24; /* amarillo dorado */
-  color: #1e293b;
-  transition: background-color 0.3s ease;
-}
-
-.btn-accion.editar:hover {
-  background-color: #ca8a04;
-}
-
-.btn-accion.eliminar {
-  background-color: #ef4444; /* rojo suave */
-  color: white;
-  transition: background-color 0.3s ease;
-}
-
-.btn-accion.eliminar:hover {
-  background-color: #b91c1c;
-}
-
-.formulario input,
-.formulario textarea {
-  width: 100%;
-  padding: 0.65rem;
-  border: 1.5px solid #d1d5db;
-  border-radius: 8px;
-  margin-bottom: 1.25rem;
-  font-size: 15px;
-  color: #374151;
-  transition: border-color 0.3s ease;
-}
-
-.formulario input:focus,
-.formulario textarea:focus {
-  outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 5px #2563ebaa;
-}
-
-.btn-link {
-  color: #2563eb;
-  font-size: 14px;
-  margin-bottom: 1rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.btn-link:hover {
-  color: #1e40af;
-}
-
-.btn-guardar {
-  background-color: #2563eb;
-  color: white;
-  padding: 0.65rem 1.2rem;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.6);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.btn-guardar:hover {
-  background-color: #1e40af;
-  box-shadow: 0 6px 15px rgba(30, 64, 175, 0.8);
-}
-
-.mensaje {
-  margin-top: 1rem;
-  font-size: 15px;
-  color: #b91c1c;
-  font-weight: 600;
 }
