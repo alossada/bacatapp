@@ -17,6 +17,7 @@ import ProductosPorCategoria from "./components/ProductosPorCategoria";
 import RegistroUsuario from './components/RegistroUsuario';
 import LoginUsuario from './components/LoginUsuario';
 
+
 function HomePage() {
   return <h2>Bienvenido a BacataApp</h2>;
 }

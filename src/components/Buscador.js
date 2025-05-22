@@ -1,6 +1,27 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../utils/api";
 import './Buscador.css';
+
+// Función para importar íconos locales
+const importarIcono = (nombreArchivo) => {
+  try {
+    return require(`../assets/iconos/${nombreArchivo}`);
+  } catch (e) {
+    console.warn(`Icono no encontrado: ${nombreArchivo}`);
+    return require(`../assets/iconos/default.png`);
+  }
+};
+
+// Función para obtener hasta 10 productos aleatorios únicos
+const obtenerProductosAleatorios = (lista) => {
+  const copia = [...lista];
+  const seleccionados = new Set();
+  while (seleccionados.size < 10 && copia.length > 0) {
+    const index = Math.floor(Math.random() * copia.length);
+    seleccionados.add(copia.splice(index, 1)[0]);
+  }
+  return Array.from(seleccionados);
+};
 
 const Buscador = () => {
   const [productos, setProductos] = useState([]);
@@ -12,10 +33,13 @@ const Buscador = () => {
     const fetchData = async () => {
       try {
         const [resProductos, resCategorias] = await Promise.all([
-          axios.get("http://localhost:8080/productos"),
-          axios.get("http://localhost:8080/categorias")
+          api.get("/productos"),
+          api.get("/categorias")
         ]);
-        setProductos(Array.isArray(resProductos.data) ? resProductos.data : []);
+
+        const dataProductos = Array.isArray(resProductos.data) ? resProductos.data : [];
+        const aleatorios = obtenerProductosAleatorios(dataProductos);
+        setProductos(aleatorios);
         setCategorias(Array.isArray(resCategorias.data) ? resCategorias.data : []);
       } catch (error) {
         console.error("Error al obtener productos o categorías:", error);
@@ -34,8 +58,8 @@ const Buscador = () => {
   });
 
   return (
-    <section className="buscador-container">
-      <h2 className="buscador-titulo">Buscar Productos</h2>
+    <section className="recomendaciones-container">
+      <h2 className="recomendaciones-titulo">Buscar Productos</h2>
 
       <div className="buscador-controles">
         <input
@@ -60,26 +84,43 @@ const Buscador = () => {
         </select>
       </div>
 
-      <div className="buscador-grid">
+      <div className="recomendaciones-grid">
         {productosFiltrados.length > 0 ? (
-          productosFiltrados.map((producto) => (
-            <div key={producto.id} className="buscador-card">
-              <h3 className="buscador-nombre">{producto.nombre}</h3>
-              <p className="buscador-categoria">
-                Categoría: {producto.categoria?.titulo || "Sin categoría"}
-              </p>
-              <p className="buscador-descripcion">{producto.descripcion}</p>
-              {producto.imagenes?.[0] && (
-                <img
-                  src={producto.imagenes[0]}
-                  alt={producto.nombre}
-                  className="buscador-imagen"
-                />
-              )}
-            </div>
-          ))
+          productosFiltrados.map((producto) => {
+            console.log(`Características del producto "${producto.nombre}":`, producto.caracteristicas);
+
+            return (
+              <div key={producto.id} className="recomendaciones-card">
+                {producto.imagenes?.[0] && (
+                  <img
+                    src={producto.imagenes[0]}
+                    alt={producto.nombre}
+                    className="recomendaciones-imagen"
+                  />
+                )}
+                <h3 className="recomendaciones-nombre">{producto.nombre}</h3>
+                <p className="recomendaciones-descripcion">{producto.descripcion}</p>
+                <p className="recomendaciones-categoria">
+                  Categoría: {producto.categoria?.titulo || "Sin categoría"}
+                </p>
+
+                <div className="recomendaciones-caracteristicas">
+                  {producto.caracteristicas?.map((c, index) => (
+                    <div key={index} className="caracteristica-item">
+                      <img
+                        src={importarIcono(c.icono)}
+                        alt={c.nombre}
+                        className="caracteristica-icono"
+                      />
+                      <span>{c.nombre}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })
         ) : (
-          <p className="buscador-no-resultados">No se encontraron productos.</p>
+          <p className="recomendaciones-no-resultados">No se encontraron productos.</p>
         )}
       </div>
     </section>
@@ -88,8 +129,3 @@ const Buscador = () => {
 
 export default Buscador;
 
-
-
-
-
-  

@@ -1,55 +1,99 @@
-.buscador-container {
-  padding: 2rem;
+.recomendaciones-container {
   max-width: 1200px;
-  margin: auto;
+  margin: 40px auto;
+  padding: 40px 16px;
 }
 
-.buscador-titulo {
+.recomendaciones-titulo {
   font-size: 1.8rem;
-  margin-bottom: 1rem;
+  font-weight: bold;
+  margin-bottom: 24px;
+  color: #333;
+  text-align: center;
 }
 
 .buscador-controles {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
   flex-wrap: wrap;
 }
 
-.buscador-input, .buscador-select {
-  padding: 0.5rem;
-  font-size: 1rem;
-  min-width: 200px;
-}
-
-.buscador-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-}
-
-.buscador-card {
-  border: 1px solid #ccc;
+.buscador-input,
+.buscador-select {
+  padding: 10px 14px;
   border-radius: 8px;
-  padding: 1rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  min-width: 240px;
+}
+
+.recomendaciones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.recomendaciones-card {
   background-color: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.buscador-imagen {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  margin-top: 0.5rem;
-  border-radius: 4px;
+.recomendaciones-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
 }
 
-.buscador-no-resultados {
-  font-style: italic;
+.recomendaciones-nombre {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
+
+.recomendaciones-descripcion {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.recomendaciones-categoria {
+  font-size: 0.85rem;
   color: #777;
+  margin-bottom: 12px;
 }
 
-.buscador-categoria {
-  font-weight: bold;
-  color: #2c3e50;
-  margin: 0.5rem 0;
+.recomendaciones-imagen {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.recomendaciones-caracteristicas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.caracteristica-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #f3f3f3;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.caracteristica-icono {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }

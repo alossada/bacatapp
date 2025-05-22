@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../utils/api";
+import "./DetalleProducto.css"; 
 
 const DetalleProducto = () => {
   const { id } = useParams();
@@ -10,8 +11,7 @@ const DetalleProducto = () => {
   useEffect(() => {
     const fetchProducto = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/productos/${id}`);
-        console.log("Detalle del producto:", response.data);
+        const response = await api.get(`/productos/${id}`);
         setProducto(response.data);
       } catch (error) {
         console.error("Error al cargar el producto:", error);
@@ -22,39 +22,60 @@ const DetalleProducto = () => {
   }, [id]);
 
   if (!producto) {
-    return <p className="text-center py-10">Cargando producto...</p>;
+    return <p className="loading-text">Cargando producto...</p>;
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="detalle-container">
       {/* Header */}
-      <header className="bg-white shadow p-4 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-gray-800">{producto.nombre}</h1>
-        <button
-          onClick={() => navigate(-1)}
-          className="text-blue-600 hover:underline"
-        >
-          ⬅ Volver
-        </button>
+      <header className="detalle-header">
+        <h1>{producto.nombre}</h1>
+        <button onClick={() => navigate(-1)}>⬅ Volver</button>
       </header>
 
-      {/* Body */}
-      <main className="max-w-4xl mx-auto p-6 bg-white mt-6 rounded-lg shadow">
-        <p className="text-gray-700 mb-4">{producto.descripcion}</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {producto.imagenes?.map((img, index) => (
-            <img
-            key={index}
-            src={img}
-            alt={`Imagen ${index + 1}`}
-            className="rounded-lg w-full h-56 object-cover hover:scale-105 transition-transform"
-            />
-            ))}
-        </div>
+      {/* Cuerpo */}
+      <main className="detalle-main">
+        <p className="producto-descripcion">{producto.descripcion}</p>
 
+        {/* Características */}
+        <section className="caracteristicas-bloque">
+          <h2>Características</h2>
+          {producto.caracteristicas?.length ? (
+            <div className="caracteristicas-grid">
+              {producto.caracteristicas.map((car) => {
+                const esURL = /^https?:\/\//.test(car.icono || "");
+                return (
+                  <div key={car.id} className="caracteristica-card">
+                    {esURL ? (
+                      <img src={car.icono} alt={car.nombre} className="caracteristica-icono" />
+                    ) : (
+                      <div className={`caracteristica-icono fallback-icon`}></div>
+                    )}
+                    <span>{car.nombre}</span>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <p className="texto-secundario">Sin características.</p>
+          )}
+        </section>
+
+        {/* Galería de imágenes */}
+        <div className="galeria-imagenes">
+          {producto.imagenes?.map((img, i) => (
+            <img
+              key={i}
+              src={img}
+              alt={`Imagen ${i + 1}`}
+              className="imagen-producto"
+            />
+          ))}
+        </div>
       </main>
     </div>
   );
 };
 
 export default DetalleProducto;
+

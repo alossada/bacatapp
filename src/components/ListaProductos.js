@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import api from '../utils/api';
-import './ListaProductos.css';
+import { useNavigate } from "react-router-dom";
+import api from "../utils/api";
+import "./ListaProductos.css";
 
 const ListaProductos = () => {
   const [productos, setProductos] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   // Función para seleccionar 10 productos únicos aleatorios
   const obtenerProductosAleatorios = (lista) => {
@@ -24,7 +26,6 @@ const ListaProductos = () => {
       setError("");
       try {
         const response = await api.get("http://localhost:8080/productos");
-        // Aseguramos que response.data sea array
         const data = Array.isArray(response.data) ? response.data : [];
         setProductos(data);
       } catch (err) {
@@ -46,7 +47,11 @@ const ListaProductos = () => {
 
       <div className="productos-grid">
         {productos.map((producto) => (
-          <div key={producto.id} className="producto-card">
+          <div
+            key={producto.id}
+            className="producto-card"
+            onClick={() => navigate(`/producto/${producto.id}`)}
+          >
             {producto.imagenes?.[0] && (
               <img
                 src={producto.imagenes[0]}
@@ -66,6 +71,3 @@ const ListaProductos = () => {
 };
 
 export default ListaProductos;
-
-
-
