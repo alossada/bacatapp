@@ -17,6 +17,13 @@ const AdminPanel = () => {
     <>
       <div className="admin-header-bar">
         <button
+          onClick={() => navigate("/admin/agregar-categoria")}
+          className="admin-button agregar"
+        >
+         Agregar Categoría
+        </button>
+        
+        <button
           onClick={handleAgregarProducto}
           className="admin-button agregar"
         >
