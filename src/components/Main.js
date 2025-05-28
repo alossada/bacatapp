@@ -1,6 +1,6 @@
 import React from 'react';
 import './Main.css';
-import Buscador from './Buscador';
+import Buscador from './Buscador.js';
 import Categorias from './Categorias';
 import Recomendaciones from './Recomendaciones';
 

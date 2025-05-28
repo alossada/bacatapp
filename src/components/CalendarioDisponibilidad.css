@@ -1,0 +1,27 @@
+.calendario-disponibilidad {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #fefdfb;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+}
+
+.calendario-custom .react-datepicker__header {
+  background-color: #33717e;
+  color: #fff;
+}
+
+.calendario-custom .react-datepicker__day--disabled {
+  color: #ccc !important;
+  background-color: #f8f8f8;
+  cursor: not-allowed;
+}
+
+.calendario-custom .react-datepicker__day--selected,
+.calendario-custom .react-datepicker__day--in-selecting-range,
+.calendario-custom .react-datepicker__day--in-range {
+  background-color: #85c1cc;
+  color: #fff;
+}
+

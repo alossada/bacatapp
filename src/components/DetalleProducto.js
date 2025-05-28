@@ -1,81 +1,89 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../utils/api";
-import "./DetalleProducto.css"; 
+import CalendarioDisponibilidad from "../components/CalendarioDisponibilidad";
+import "./DetalleProducto.css";
 
 const DetalleProducto = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [producto, setProducto] = useState(null);
 
+  const [producto, setProducto] = useState(null);
+  const [fechasOcupadas, setFechasOcupadas] = useState([]);
+  const [fechaInicio, setFechaInicio] = useState(null);
+  const [fechaFin, setFechaFin] = useState(null);
+  const [errorDisp, setErrorDisp] = useState("");
+
+  /* Datos del producto + disponibilidad*/
   useEffect(() => {
-    const fetchProducto = async () => {
+    const cargarDatos = async () => {
       try {
-        const response = await api.get(`/productos/${id}`);
-        setProducto(response.data);
-      } catch (error) {
-        console.error("Error al cargar el producto:", error);
+        const [{ data: prod }, { data: fechas }] = await Promise.all([
+          api.get(`/productos/${id}`),
+          api.get(`/reservas/ocupadas/${id}`),
+        ]);
+        setProducto(prod);
+        setFechasOcupadas(fechas);      // array de ISO-dates
+      } catch (err) {
+        console.error(err);
+        setErrorDisp("No se pudo cargar la disponibilidad.");
       }
     };
-
-    fetchProducto();
+    cargarDatos();
   }, [id]);
 
-  if (!producto) {
-    return <p className="loading-text">Cargando producto...</p>;
-  }
+  if (!producto) return <p className="loading-text">Cargando producto…</p>;
 
   return (
-    <div className="detalle-container">
-      {/* Header */}
+    <section className="detalle-seccion">
       <header className="detalle-header">
-        <h1>{producto.nombre}</h1>
-        <button onClick={() => navigate(-1)}>⬅ Volver</button>
+        <h1 className="detalle-titulo">{producto.nombre}</h1>
+        <button onClick={() => navigate(-1)} className="volver-btn">
+          ⬅ Volver
+        </button>
       </header>
 
-      {/* Cuerpo */}
-      <main className="detalle-main">
-        <p className="producto-descripcion">{producto.descripcion}</p>
+      <p className="detalle-descripcion">{producto.descripcion}</p>
 
-        {/* Características */}
-        <section className="caracteristicas-bloque">
-          <h2>Características</h2>
-          {producto.caracteristicas?.length ? (
-            <div className="caracteristicas-grid">
-              {producto.caracteristicas.map((car) => {
-                const esURL = /^https?:\/\//.test(car.icono || "");
-                return (
-                  <div key={car.id} className="caracteristica-card">
-                    {esURL ? (
-                      <img src={car.icono} alt={car.nombre} className="caracteristica-icono" />
-                    ) : (
-                      <div className={`caracteristica-icono fallback-icon`}></div>
-                    )}
-                    <span>{car.nombre}</span>
-                  </div>
-                );
-              })}
-            </div>
-          ) : (
-            <p className="texto-secundario">Sin características.</p>
-          )}
-        </section>
-
-        {/* Galería de imágenes */}
-        <div className="galeria-imagenes">
-          {producto.imagenes?.map((img, i) => (
-            <img
-              key={i}
-              src={img}
-              alt={`Imagen ${i + 1}`}
-              className="imagen-producto"
-            />
+      {/* Características */}
+      <h2 className="detalle-subtitulo">Características</h2>
+      {producto.caracteristicas?.length ? (
+        <div className="detalle-caracteristicas">
+          {producto.caracteristicas.map((c) => (
+            <span key={c.id} className="caracteristica-item">
+              {/^https?:\/\//.test(c.icono) && (
+                <img src={c.icono} alt={c.nombre} className="caracteristica-icono" />
+              )}
+              {c.nombre}
+            </span>
           ))}
         </div>
-      </main>
-    </div>
+      ) : (
+        <p className="texto-secundario">Sin características.</p>
+      )}
+
+      {/* Galería */}
+      {producto.imagenes?.[0] && (
+        <img src={producto.imagenes[0]} alt={producto.nombre} className="detalle-imagen" />
+      )}
+
+      {/* Calendario de disponibilidad */}
+      <h2 className="detalle-subtitulo">Disponibilidad</h2>
+      {errorDisp ? (
+        <p className="error-texto">{errorDisp}</p>
+      ) : (
+        <CalendarioDisponibilidad
+          fechaInicio={fechaInicio}
+          setFechaInicio={setFechaInicio}
+          fechaFin={fechaFin}
+          setFechaFin={setFechaFin}
+          fechasOcupadas={fechasOcupadas}
+        />
+      )}
+    </section>
   );
 };
 
 export default DetalleProducto;
+
 
