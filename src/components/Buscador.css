@@ -1,55 +1,138 @@
-.buscador-container {
+.buscador-seccion {
+  max-width: 1000px;
+  margin: 2rem auto;
   padding: 2rem;
-  max-width: 1200px;
-  margin: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .buscador-titulo {
   font-size: 1.8rem;
-  margin-bottom: 1rem;
+  color: #33717e;
+  margin-bottom: 0.5rem;
+}
+
+.buscador-descripcion {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
 }
 
 .buscador-controles {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.buscador-input, .buscador-select {
-  padding: 0.5rem;
-  font-size: 1rem;
-  min-width: 200px;
-}
-
-.buscador-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
+  align-items: end;
 }
 
-.buscador-card {
+.buscador-controles label {
+  color: #33717e;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.buscador-input,
+.buscador-select,
+.react-datepicker-wrapper input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
   border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.buscador-input:focus,
+.buscador-select:focus,
+.react-datepicker-wrapper input:focus {
+  border-color: #33717e;
+  outline: none;
+}
+
+.buscador-boton {
+  padding: 0.6rem 1rem;
+  background-color: #33717e;
+  color: #fefdfb;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buscador-boton:hover {
+  background-color: #85c1cc;
+}
+
+.recomendaciones-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.recomendaciones-card {
+  background-color: #fefdfb;
   border-radius: 8px;
   padding: 1rem;
-  background-color: #fff;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
 }
 
-.buscador-imagen {
+.recomendaciones-card:hover {
+  transform: translateY(-4px);
+}
+
+.recomendaciones-imagen {
   width: 100%;
-  height: 180px;
+  height: 160px;
   object-fit: cover;
-  margin-top: 0.5rem;
-  border-radius: 4px;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
 }
 
-.buscador-no-resultados {
-  font-style: italic;
-  color: #777;
-}
-
-.buscador-categoria {
-  font-weight: bold;
-  color: #2c3e50;
+.recomendaciones-card h3 {
+  color: #33717e;
   margin: 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.recomendaciones-card p {
+  font-size: 0.95rem;
+  color: #444;
+  margin: 0.3rem 0;
+}
+
+.recomendaciones-caracteristicas {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.caracteristica-item {
+  background-color: #eef6f8;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+}
+
+.caracteristica-icono {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.recomendaciones-no-resultados {
+  text-align: center;
+  font-size: 1rem;
+  color: #d84561;
+  margin-top: 2rem;
 }

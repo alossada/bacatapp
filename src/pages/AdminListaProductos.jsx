@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import api from '../utils/api';
 import { useNavigate } from 'react-router-dom';
-import './AdminListaProductos.css'; // ⬅️ Importa el archivo de estilos
+import './AdminListaProductos.css'; 
 
 const AdminListaProductos = () => {
   const [productos, setProductos] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const fetchProductos = async () => {
       try {
@@ -30,14 +30,10 @@ const AdminListaProductos = () => {
     }
   };
 
-  const handleEditar = (id) => {
-    navigate(`/admin/editar-producto/${id}`);
-  }; 
-
   return (
     <div className="admin-container">
       <div className="admin-header">
-        <h2>Administrar Productos</h2>
+        <h2>Administrar Hoteles</h2>
         <button className="btn-add" onClick={() => navigate('/admin/agregar-producto')}>
           + Agregar Producto
         </button>
@@ -52,45 +48,59 @@ const AdminListaProductos = () => {
               <th>Nombre</th>
               <th>Descripción</th>
               <th>Categoría</th>
+              <th>Características</th> 
               <th>Imagen</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {productos.length > 0 ? (
+            {productos.length ? (
               productos.map(p => (
                 <tr key={p.id}>
                   <td>{p.nombre}</td>
                   <td>{p.descripcion}</td>
-                  <td>{p.categoria?.titulo || 'Sin categoría'}</td>
+                  <td>{p.categoria?.titulo || '—'}</td>
                   <td>
-
-                    {p.imagenes?.length > 0 ? (
+                    {p.caracteristicas?.length ? (
+                      p.caracteristicas.map(c => (
+                        <span key={c.id} className="chip">
+                          {c.nombre}
+                        </span>
+                      ))
+                    ) : (
+                      '—'
+                    )}
+                  </td>
+                  <td>
+                    {p.imagenes?.length ? (
                       <img
                         src={p.imagenes[0]}
                         alt={p.nombre}
                         className="product-image"
                       />
                     ) : (
-                      <span className="text-muted">Sin imagen</span>
+                      '—'
                     )}
                   </td>
                   <td>
-                    <button className="btn-edit" onClick={() => handleEditar(p.id)}>
+                    <button
+                      className="btn-edit"
+                      onClick={() => navigate(`/admin/editar-producto/${p.id}`)}
+                    >
                       Editar
                     </button>
-                    <button className="btn-delete" onClick={() => handleEliminar(p.id)}>
-                          
-                     Eliminar
+                    <button
+                      className="btn-delete"
+                      onClick={() => handleEliminar(p.id)}
+                    >
+                      Eliminar
                     </button>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="5" className="text-muted">
-                  No hay productos registrados.
-                </td>
+                <td colSpan="6">No hay productos.</td>
               </tr>
             )}
           </tbody>
@@ -101,4 +111,3 @@ const AdminListaProductos = () => {
 };
 
 export default AdminListaProductos;
-

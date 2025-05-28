@@ -9,6 +9,7 @@ import AdminPanel from "./pages/AdminPanel";
 import AgregarProducto from './pages/AgregarProducto';
 import AdminListaProductos from './pages/AdminListaProductos';
 import CrearAdmin from './pages/CrearAdmin';
+import AgregarCategoria from './pages/AgregarCategoria';
 
 import ListaProductos from "./components/ListaProductos";
 import DetalleProducto from "./components/DetalleProducto";
@@ -16,6 +17,9 @@ import Categorias from "./components/Categorias";
 import ProductosPorCategoria from "./components/ProductosPorCategoria";
 import RegistroUsuario from './components/RegistroUsuario';
 import LoginUsuario from './components/LoginUsuario';
+
+import "react-datepicker/dist/react-datepicker.css";
+
 
 function HomePage() {
   return <h2>Bienvenido a BacataApp</h2>;
@@ -50,6 +54,7 @@ function App() {
           <Route path="/admin/agregar-producto"   element={soloAdmin(<AgregarProducto />)} />
           <Route path="/admin/lista-productos"    element={soloAdmin(<AdminListaProductos />)} />
           <Route path="/admin/crear-admin" element={<CrearAdmin />} />
+          <Route path="/admin/agregar-categoria" element={<AgregarCategoria />} />
 
           {/* Rutas públicas */}
           <Route path="/hoteles" element={<ListaProductos />} />
