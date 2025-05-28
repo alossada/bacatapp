@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import api from "../utils/api";
 import "./ProductosPorCategoria.css"; // crea estilos si los necesitas
 
 const ProductosPorCategoria = () => {
@@ -11,7 +11,7 @@ const ProductosPorCategoria = () => {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/productos/categoria/${id}`);
+        const response = await api.get(`/productos/categoria/${id}`);
         setProductos(response.data);
         if (response.data.length > 0 && response.data[0].categoria) {
           setCategoriaNombre(response.data[0].categoria.titulo);

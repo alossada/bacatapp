@@ -1,100 +1,138 @@
-.recomendaciones-container {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 40px 16px;
+.buscador-seccion {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.recomendaciones-titulo {
+.buscador-titulo {
   font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 24px;
-  color: #333;
-  text-align: center;
+  color: #33717e;
+  margin-bottom: 0.5rem;
+}
+
+.buscador-descripcion {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
 }
 
 .buscador-controles {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  align-items: end;
+}
+
+.buscador-controles label {
+  color: #33717e;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.3rem;
 }
 
 .buscador-input,
-.buscador-select {
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+.buscador-select,
+.react-datepicker-wrapper input {
+  width: 100%;
+  padding: 0.5rem;
   font-size: 1rem;
-  min-width: 240px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.buscador-input:focus,
+.buscador-select:focus,
+.react-datepicker-wrapper input:focus {
+  border-color: #33717e;
+  outline: none;
+}
+
+.buscador-boton {
+  padding: 0.6rem 1rem;
+  background-color: #33717e;
+  color: #fefdfb;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buscador-boton:hover {
+  background-color: #85c1cc;
 }
 
 .recomendaciones-grid {
+  margin-top: 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  gap: 1.5rem;
 }
 
 .recomendaciones-card {
-  background-color: #fff;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: #fefdfb;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
 }
 
 .recomendaciones-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-}
-
-.recomendaciones-nombre {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #222;
-  margin-top: 12px;
-  margin-bottom: 8px;
-}
-
-.recomendaciones-descripcion {
-  color: #555;
-  font-size: 0.95rem;
-  margin-bottom: 8px;
-}
-
-.recomendaciones-categoria {
-  font-size: 0.85rem;
-  color: #777;
-  margin-bottom: 12px;
+  transform: translateY(-4px);
 }
 
 .recomendaciones-imagen {
   width: 100%;
   height: 160px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.recomendaciones-card h3 {
+  color: #33717e;
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.recomendaciones-card p {
+  font-size: 0.95rem;
+  color: #444;
+  margin: 0.3rem 0;
 }
 
 .recomendaciones-caracteristicas {
+  margin-top: 0.5rem;
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 12px;
 }
 
 .caracteristica-item {
+  background-color: #eef6f8;
+  padding: 4px 8px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
-  gap: 6px;
-  background-color: #f3f3f3;
-  padding: 6px 10px;
-  border-radius: 8px;
+  gap: 4px;
   font-size: 0.85rem;
 }
 
 .caracteristica-icono {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   object-fit: contain;
 }
 
+.recomendaciones-no-resultados {
+  text-align: center;
+  font-size: 1rem;
+  color: #d84561;
+  margin-top: 2rem;
+}

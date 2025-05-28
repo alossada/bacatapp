@@ -18,6 +18,8 @@ import ProductosPorCategoria from "./components/ProductosPorCategoria";
 import RegistroUsuario from './components/RegistroUsuario';
 import LoginUsuario from './components/LoginUsuario';
 
+import "react-datepicker/dist/react-datepicker.css";
+
 
 function HomePage() {
   return <h2>Bienvenido a BacataApp</h2>;
@@ -59,7 +61,7 @@ function App() {
           <Route path="/productos/:id" element={<DetalleProducto />} />
 
           <Route path="/categorias" element={<Categorias />} />
-          
+          <Route path="/categorias/:id/productos" element={<ProductosPorCategoria />} />
         </Routes>
       </div>
       <Main />

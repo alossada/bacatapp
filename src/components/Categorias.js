@@ -21,9 +21,10 @@ const Categorias = () => {
     cargarCategorias();
   }, []);
 
-  const handleClickCategoria = (id) => {
-    navigate(`/categorias/${id}/productos`);
-  };
+ const handleClickCategoria = (id) => {
+  navigate(`/productos/categoria/${id}`);
+};
+
 
   return (
     <section className="categorias-container">
