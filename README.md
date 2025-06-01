@@ -1,52 +1,91 @@
-# BacatApp - Aplicación de Reservas
 
-BacatApp es una plataforma web para gestionar reservas de productos como hoteles, autos u hospedajes, con un diseño enfocado en la experiencia del usuario y la administración eficiente de los servicios disponibles.
+# 🏨 BacatApp - Aplicación de Reservas
 
-## 🚀 Tecnologías
+BacatApp es una plataforma web desarrollada con React que permite a los usuarios gestionar reservas de productos como hoteles, autos u hospedajes. La aplicación está diseñada para ofrecer una experiencia de usuario intuitiva y eficiente.
 
-- Frontend: [React](https://reactjs.org/)
-- Backend: [Java Spring Boot](https://spring.io/projects/spring-boot)
-- Base de datos: H2 en memoria (modo desarrollo)
+## 🚀 Tecnologías Utilizadas
 
----
+- **React**: Biblioteca de JavaScript para construir interfaces de usuario.
+- **React Router**: Manejo de rutas en la aplicación.
+- **Axios**: Cliente HTTP para realizar solicitudes al backend.
+- **Tailwind CSS**: Framework de CSS para estilos rápidos y responsivos.
+- **Java Spring Boot**: Backend de la aplicación (ver repositorio [backend-reservas](https://github.com/alossada/backend-reservas)).
 
-## 🧱 Estructura del Proyecto
+## 📁 Estructura del Proyecto
 
-/frontend-reservas
-/backend-reservas
+```
+bacatapp/
+├── public/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   ├── App.js
+│   └── index.js
+├── package.json
+└── README.md
+```
 
+## ⚙️ Configuración y Ejecución
 
----
+### Prerrequisitos
 
-## 🔧 Instalación y ejecución
+- Node.js (versión 14 o superior)
+- npm (versión 6 o superior)
 
-### Frontend (React)
+### Pasos para ejecutar la aplicación
 
-1. Entrá al directorio del frontend:
+1. **Clonar el repositorio:**
+
    ```bash
-   cd frontend-reservas
+   git clone https://github.com/alossada/bacatapp.git
+   cd bacatapp
+   ```
 
-2. Instalá las dependencias:
+2. **Instalar las dependencias:**
 
-npm install
+   ```bash
+   npm install
+   ```
 
+3. **Ejecutar la aplicación:**
 
-3. Ejecutá la app:
+   ```bash
+   npm start
+   ```
 
-npm start
+   La aplicación estará disponible en: [http://localhost:3000](http://localhost:3000)
 
-4. Accedé en: http://localhost:3000
+> **Nota:** Asegúrate de que el backend esté en ejecución en [http://localhost:8080](http://localhost:8080) para que la aplicación funcione correctamente.
 
-### Backend (Spring Boot)
+## 📌 Funcionalidades
 
-1. Abre el proyecto en IntelliJ o VS Code (con soporte Java).
+- Visualización de productos disponibles para reserva.
+- Formulario para agregar nuevos productos (solo para administradores).
+- Lista de productos con opciones para editar o eliminar (solo para administradores).
+- Navegación fluida entre diferentes secciones de la aplicación.
 
-2. Corré la clase principal:
+## 🛠️ Próximas Mejoras
 
-ReservasAppApplication.java
+- Implementación de autenticación y autorización de usuarios.
+- Validaciones más robustas en los formularios.
+- Mejora en la gestión de errores y mensajes al usuario.
+- Diseño responsivo para dispositivos móviles.
 
-3. El backend se ejecuta en: http://localhost:8080
+## 🤝 Contribuciones
 
-## ✍️ Autor
+Las contribuciones son bienvenidas. Por favor, sigue estos pasos:
 
-Angelica Lossada - GitHub
+1. Haz un fork del proyecto.
+2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
+3. Realiza tus cambios y haz commit (`git commit -am 'Agrega nueva funcionalidad'`).
+4. Haz push a la rama (`git push origin feature/nueva-funcionalidad`).
+5. Abre un Pull Request.
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+## 👩‍💻 Autor
+
+- **Angélica Lossada** - [@alossada](https://github.com/alossada)
